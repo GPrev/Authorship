@@ -1,9 +1,9 @@
 # Authorship Attribution
 AcqDeCo Project on authorship attribution.
 
-In this project, the aim is to build a classier able to eciently attribute a new text to his/her
+In this project, the aim is to build a classifier able to efficiently attribute a new text to his/her
 author, relying on textual characteristics (words, stems, ngrams of words or characters, punctuation
-maks, etc.). At least two dierent representations of the textual data have to be compared.
+maks, etc.). At least two different representations of the textual data have to be compared.
 
 ## Collaborators
 - BOUVET Julien
@@ -25,3 +25,7 @@ maks, etc.). At least two dierent representations of the textual data have to b
 - First classifier (*Thierry*) (*Julien*)
 - Second calssifier (*Gabriel*) (*Liantsoa*) (*Prateek*)
 - Statistics about results (*Gabriel*)
+
+
+- I will reorganize files later so we all have the same eclipse project. (*Thierry*)
+
