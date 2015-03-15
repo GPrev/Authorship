@@ -1,4 +1,5 @@
-package FileListBuilding;
+package fileListBuilding;
+// Package renomé : en java, ça commence par des minuscules :)
 import java.io.File;
 
 
@@ -12,6 +13,7 @@ public class Article {
 		
 	}
 
+	// why "current" and not "file" or "text" ?
 	public File getCurrent() {
 		return current;
 	}

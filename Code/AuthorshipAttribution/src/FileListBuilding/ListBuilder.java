@@ -1,4 +1,4 @@
-package FileListBuilding;
+package fileListBuilding;
 import java.io.File;
 import java.util.ArrayList;
 
