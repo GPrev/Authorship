@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import fileListBuilding.*;
@@ -17,8 +18,7 @@ public class DataRepresentation {
 	
 	
 	
-	public void parseAll(List<File> array) {
-		 ArrayList<Article> artArray = ListBuilder.buildList("");
+	public void parseAll(List<Article> artArray) {
 		for (Article article : artArray){
 			if (article.getCurrent().exists() && article.getCurrent().canRead()) {
 				parse(article.getCurrent());
@@ -31,6 +31,12 @@ public class DataRepresentation {
 	
 	public void parse(File f) {
 		byte[] bytes = null;
+		HashMap<Character, Integer> punctuation = new HashMap<Character, Integer>();
+		punctuation.put(';', 0);
+		punctuation.put(',', 0);
+		punctuation.put('.', 0);
+		punctuation.put('!', 0);
+		punctuation.put('?', 0);
 		try {
 			bytes = Files.readAllBytes(Paths.get(f.getPath()));
 		} catch (IOException e1) {
@@ -38,10 +44,16 @@ public class DataRepresentation {
 			e1.printStackTrace();
 		}
 		String text = new String(bytes, StandardCharsets.UTF_8);
-		
-		String[] lines = text.split("(\\.|;)");
+		for(int i = 0; i < text.length(); i++) {
+		    if(punctuation.containsKey(text.charAt(i))) { 
+		    	punctuation.put(text.charAt(i), punctuation.get(text.charAt(i)) + 1);
+		    }
+		}
+		//"(\\.|;)"
+		String[] lines = text.split("\n");
 		ArrayList<Integer> numberOfWords = new ArrayList<Integer>();
 		for (String line : lines) {
+			System.out.println(line);
 			numberOfWords.add(line.split(" ").length);
 		}
 		
@@ -76,8 +88,12 @@ public class DataRepresentation {
 	
 	public static void main(String [] args) {
 		//call julien work
+		//List<Article> listfiles = ListBuilder.buildList("../Data/Reuters50_50/C50test/AaronPressman");
+		//List<Article> listfiles = ListBuilder.buildList("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/");
 		DataRepresentation d = new DataRepresentation();
-		//d.parse(array);
+		//d.parseAll(listfiles);
+		File f = new File("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/42764newsML.txt");
+		d.parse(f);
 		//call classifier
 		//dance macarena
 		//bring beer and stuffs

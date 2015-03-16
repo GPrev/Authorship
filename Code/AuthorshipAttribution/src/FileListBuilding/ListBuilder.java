@@ -27,6 +27,8 @@ public class ListBuilder {
 		
 	}
 	
+	//"../Data/Reuters50_50/C50test/AaronPressman"
+	//cet argument génère une nullpointerexception ... Try catch ?
 	public static ArrayList<Article> buildList(String path){
 			ArrayList<Article> returnList = new ArrayList<Article>();
 			
