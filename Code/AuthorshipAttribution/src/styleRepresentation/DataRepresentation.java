@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import fileListBuilding.*;
@@ -30,6 +31,12 @@ public class DataRepresentation {
 	}
 	
 	public void parse(File f) {
+		HashMap<Character, Integer> punctuation = new HashMap<Character, Integer>();
+		punctuation.put(';', 0);
+		punctuation.put('!', 0);
+		punctuation.put('?', 0);
+		punctuation.put(':', 0);
+		punctuation.put(',', 0);
 		byte[] bytes = null;
 		try {
 			bytes = Files.readAllBytes(Paths.get(f.getPath()));
@@ -38,7 +45,12 @@ public class DataRepresentation {
 			e1.printStackTrace();
 		}
 		String text = new String(bytes, StandardCharsets.UTF_8);
-		
+		for (int i = 0 ; i < text.length() ; i++) {
+			Character c = text.charAt(i);
+			if (punctuation.containsKey(c)) {
+				punctuation.put(c, punctuation.get(c) + 1);
+			}
+		}
 		String[] lines = text.split("(\\.|;)");
 		ArrayList<Integer> numberOfWords = new ArrayList<Integer>();
 		for (String line : lines) {
