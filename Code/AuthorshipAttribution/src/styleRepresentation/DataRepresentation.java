@@ -33,10 +33,10 @@ public class DataRepresentation {
 		byte[] bytes = null;
 		HashMap<Character, Integer> punctuation = new HashMap<Character, Integer>();
 		punctuation.put(';', 0);
-		punctuation.put(',', 0);
-		punctuation.put('.', 0);
 		punctuation.put('!', 0);
 		punctuation.put('?', 0);
+		punctuation.put(':', 0);
+		punctuation.put(',', 0);
 		try {
 			bytes = Files.readAllBytes(Paths.get(f.getPath()));
 		} catch (IOException e1) {
@@ -45,8 +45,9 @@ public class DataRepresentation {
 		}
 		String text = new String(bytes, StandardCharsets.UTF_8);
 		for(int i = 0; i < text.length(); i++) {
-		    if(punctuation.containsKey(text.charAt(i))) { 
-		    	punctuation.put(text.charAt(i), punctuation.get(text.charAt(i)) + 1);
+			Character c = text.charAt(i);
+		    if(punctuation.containsKey(c)) { 
+		    	punctuation.put(text.charAt(i), punctuation.get(c) + 1);
 		    }
 		}
 		//"(\\.|;)"
