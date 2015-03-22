@@ -19,9 +19,14 @@ public class DataRepresentation {
 	
 	
 	public void parseAll(List<Article> artArray) {
+		HashMap<String, AuthorData> authData = new HashMap<String, AuthorData>();
 		for (Article article : artArray){
+			if (!authData.containsKey(article.getAuthor())) {
+				authData.put(article.getAuthor(), new AuthorData());
+			}
 			if (article.getCurrent().exists() && article.getCurrent().canRead()) {
-				parse(article.getCurrent());
+				authData.get(article.getAuthor()).textsData.add(parse(article.getCurrent()));
+				//parse(article.getCurrent());
 			}
 			else {
 				System.out.println("Error with file " + article.getCurrent().getName());
@@ -29,14 +34,14 @@ public class DataRepresentation {
 		}
 	}
 	
-	public void parse(File f) {
+	public TextData parse(File f) {
 		byte[] bytes = null;
 		HashMap<Character, Integer> punctuation = new HashMap<Character, Integer>();
 		punctuation.put(';', 0);
-		punctuation.put(',', 0);
-		punctuation.put('.', 0);
 		punctuation.put('!', 0);
 		punctuation.put('?', 0);
+		punctuation.put(':', 0);
+		punctuation.put(',', 0);
 		try {
 			bytes = Files.readAllBytes(Paths.get(f.getPath()));
 		} catch (IOException e1) {
@@ -45,8 +50,9 @@ public class DataRepresentation {
 		}
 		String text = new String(bytes, StandardCharsets.UTF_8);
 		for(int i = 0; i < text.length(); i++) {
-		    if(punctuation.containsKey(text.charAt(i))) { 
-		    	punctuation.put(text.charAt(i), punctuation.get(text.charAt(i)) + 1);
+			Character c = text.charAt(i);
+		    if(punctuation.containsKey(c)) { 
+		    	punctuation.put(text.charAt(i), punctuation.get(c) + 1);
 		    }
 		}
 		//"(\\.|;)"
@@ -56,7 +62,7 @@ public class DataRepresentation {
 			System.out.println(line);
 			numberOfWords.add(line.split(" ").length);
 		}
-		
+		return new TextData(punctuation, numberOfWords);
 		//return lines.length;
 		/*BufferedReader br = null;
 		 
