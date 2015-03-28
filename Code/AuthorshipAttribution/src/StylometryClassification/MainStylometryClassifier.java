@@ -33,11 +33,12 @@ public class MainStylometryClassifier {
 		}
 		
 		
-		//Adding KnownAuthor Article 
+		//Adding UnKnownAuthor Article 
 		ArrayList<Article> list_article_unknown = ListBuilder.buildList(args[1]);
 		for(Article a: list_article_unknown){
 			String path = args[1]+"/"+a.getAuthor()+"/"+a.getCurrent().getName();
 			try {
+				//Adding documents without author --> ""
 				classifier.addDocToClassifier(path, "");
 				
 			} catch (Exception e) {
