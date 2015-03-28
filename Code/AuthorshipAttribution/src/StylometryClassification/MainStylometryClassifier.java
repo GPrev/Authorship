@@ -59,7 +59,6 @@ public class MainStylometryClassifier {
 		try {
 			classifier.loadDocumentsAdded();
 			classifier.choiceOfCanonicizer("Normalize ASCII");
-			//par defaut met N = 50
 			classifier.choiceOfEventCuller("Most Common Events");
 			classifier.choiceOfEventDriver("Lexical Frequencies");
 			classifier.choiceOfAnalysisMethod("WEKA J48 Decision Tree Classifier");
