@@ -16,7 +16,7 @@ public class MainStylometryClassifier {
 	
 	public static void main(String[] args) {
 		if (args.length != 2){
-			System.out.println("Usage : java -jar BuildList.jar ARG:Folder of sample train");
+			System.out.println("arguments : Folder_of_C50Train Folder_of_C50Test");
 			throw new IllegalArgumentException();
 		}
 		
