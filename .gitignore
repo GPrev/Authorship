@@ -37,3 +37,10 @@ local.properties
 .target
 # TeXlipse plugin
 .texlipse
+
+# Latex
+*.aux
+*.log
+*.out
+*.gz
+*.toc
