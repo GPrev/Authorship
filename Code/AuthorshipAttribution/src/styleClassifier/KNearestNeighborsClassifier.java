@@ -16,9 +16,12 @@ import styleRepresentation.TextData;
 public class KNearestNeighborsClassifier {
 	public static double euclidianDist(TextData textd, TextData authd) {
 		double distance = 0;
-		ArrayList<Double> td = textd.getVals(), ad = authd.getVals();
+		/*ArrayList<Double> td = textd.getVals(), ad = authd.getVals();
 		for (int i = 0; i <  td.size() ; i++) {
 			distance += Math.pow(td.get(i) - ad.get(i), 2);
+		}*/
+		for (String feature : textd.features.keySet()) {
+			distance += Math.pow(textd.getNormalized(feature) - authd.getNormalized(feature), 2);
 		}
 		return Math.sqrt(distance);
 	}

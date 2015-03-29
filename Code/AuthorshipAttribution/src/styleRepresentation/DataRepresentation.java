@@ -46,6 +46,7 @@ public class DataRepresentation {
 		punctuation.put('?', 0);
 		punctuation.put(':', 0);
 		punctuation.put(',', 0);
+		punctuation.put('.', 0);
 		try {
 			bytes = Files.readAllBytes(Paths.get(article.getCurrent().getPath()));
 		} catch (IOException e1) {
@@ -119,7 +120,7 @@ public class DataRepresentation {
 		List<Article> listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50train");
 		//List<Article> listfiles = ListBuilder.buildList("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/");
 		List<TextData> trainingSet = parseAll(listfiles);
-		
+		TextData.setMinMaxFeatures(trainingSet);
 		listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50test");
 		//d.parseAll(listfiles);
 		testAll(trainingSet, listfiles);
