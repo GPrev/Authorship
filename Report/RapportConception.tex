@@ -1,0 +1,67 @@
+%a % comment anything after % until the end of the line
+
+%minimum references to begin our article
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+
+\pagestyle{fancy}
+%\cfoot{}
+% the last extension makes it possible to add images
+
+%presentation of the document
+\title{Authorship Attribution\smallbreak Knowledge Aquisition project}
+\author{Julien \textsc{BOUVET}, Prateek \textsc{BHATNAGAR}, \\
+	Thierry \textsc{GAUGRY}, Gabriel \textsc{PREVOSTO}, \\
+	Liantsoa \textsc{RASATA-MANANTENA}}
+\date{03/31/2015}
+\setlength\parindent{15pt}
+\begin{document}
+
+\maketitle
+%\vfill %tous les vfill prennent la même place
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=\textwidth]{Parties/Images/Logo}
+%\label{fig:logo}
+%\end{figure}
+%\vfill
+%\vfill
+
+\newpage
+%to add a table of contents
+\tableofcontents
+\newpage
+
+\section{Introduction}					\label{sec:introduction}			\input{"Text/introduction.tex"}
+
+\section{The two models chosen}			\label{sec:models}				\input{"Text/models.tex"}
+
+\section{Stemming : why and how ?}			\label{sec:stemming}			\input{"Text/stemming.tex"}
+
+\section{The first classifier}				\label{sec:classifier1}
+\subsection{Data acquisition}				\label{sec:data1}				\input{"Text/first_classifier_acquisition.tex"}
+\subsection{Data processing}				\label{sec:processing1}			\input{"Text/first_classifier_processing.tex"}
+
+\section{The second classifier}				\label{sec:classifier2}
+\subsection{Data acquisition}				\label{sec:data2}				\input{"Text/second_classifier_acquisition.tex"}
+\subsection{Data processing}				\label{sec:processing2}			\input{"Text/second_classifier_processing.tex"}
+
+\section{Comparison of the two classifiers}		\label{sec:comparison}
+\subsection{The result evaluation methodology}	\label{sec:evaluation}			\input{"Text/evaluation.tex"}
+\subsection{The final verdict}				\label{sec:verdict}				\input{"Text/verdict.tex"}
+
+\section{Conclusion}					\label{sec:concluision}			\input{"Text/conclusion.tex"}
+
+\end{document}
