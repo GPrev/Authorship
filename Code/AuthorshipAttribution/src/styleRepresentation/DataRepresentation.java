@@ -11,31 +11,35 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
+import styleClassifier.KNearestNeighborsClassifier;
 import fileListBuilding.*;
 
 public class DataRepresentation {
 	
 	
 	
-	public void parseAll(List<Article> artArray) {
+	public static List<TextData> parseAll(List<Article> artArray) {
+		ArrayList<TextData> textsData = new ArrayList<TextData>();
 		HashMap<String, AuthorData> authData = new HashMap<String, AuthorData>();
 		for (Article article : artArray){
-			if (!authData.containsKey(article.getAuthor())) {
+			/*if (!authData.containsKey(article.getAuthor())) {
 				authData.put(article.getAuthor(), new AuthorData());
-			}
-			if (article.getCurrent().exists() && article.getCurrent().canRead()) {
-				authData.get(article.getAuthor()).textsData.add(parse(article.getCurrent()));
-				//parse(article.getCurrent());
-			}
-			else {
-				System.out.println("Error with file " + article.getCurrent().getName());
-			}
+			}*/
+				//authData.get(article.getAuthor()).textsData.add(parse(article.getCurrent()));
+			textsData.add(parse(article));
 		}
+		return textsData;
 	}
 	
-	public TextData parse(File f) {
+	public static TextData parse(Article article) {
+		if (!article.getCurrent().exists() || !article.getCurrent().canRead()) {
+			System.out.println("Error with file " + article.getCurrent().getName());
+			return null;
+		}
 		byte[] bytes = null;
+		int paragraphs = 1;
 		HashMap<Character, Integer> punctuation = new HashMap<Character, Integer>();
 		punctuation.put(';', 0);
 		punctuation.put('!', 0);
@@ -43,7 +47,7 @@ public class DataRepresentation {
 		punctuation.put(':', 0);
 		punctuation.put(',', 0);
 		try {
-			bytes = Files.readAllBytes(Paths.get(f.getPath()));
+			bytes = Files.readAllBytes(Paths.get(article.getCurrent().getPath()));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -59,10 +63,13 @@ public class DataRepresentation {
 		String[] lines = text.split("\n");
 		ArrayList<Integer> numberOfWords = new ArrayList<Integer>();
 		for (String line : lines) {
-			System.out.println(line);
+			if (isTitle(line)) {
+				paragraphs++;
+			}
+			//System.out.println(line);
 			numberOfWords.add(line.split(" ").length);
 		}
-		return new TextData(punctuation, numberOfWords);
+		return new TextData(article.getAuthor(), punctuation, numberOfWords, paragraphs,  text.length(), lines.length);
 		//return lines.length;
 		/*BufferedReader br = null;
 		 
@@ -85,21 +92,37 @@ public class DataRepresentation {
 		}*/
 	}
 	
-	public void findPuntuation(String line) {
-		while (true) {
-			
+	public static boolean isTitle(String line) {
+		return line == line.toUpperCase();
+	}
+	
+	public static void testAll(List<TextData> trainingSet, List<Article> testSet) {
+		int k =  10;
+		int goodAnswers = 0;
+		int yolorandom = 0;
+		for (Article art : testSet) {
+			Entry<String, Integer> res = KNearestNeighborsClassifier.getResponse(KNearestNeighborsClassifier.getNeighbors(trainingSet, parse(art), k));
+			if (art.getAuthor() == res.getKey()) {
+				goodAnswers++;
+				if (res.getValue() == 1){
+					yolorandom++;
+				}
+			}
+			System.out.println("file " + art.getCurrent().getName()+ " " + art.getAuthor() + " "+ res.getKey() + " : " + res.getValue());
 		}
-		
+		System.out.println(""+ goodAnswers + "/2500 good answers, " + (((double)goodAnswers)/2500*100) + "%, " + yolorandom + " yolorandom");
 	}
 	
 	public static void main(String [] args) {
-		//call julien work
-		//List<Article> listfiles = ListBuilder.buildList("../Data/Reuters50_50/C50test/AaronPressman");
+		//record : k=10, 664 on train, 0 en test
+		//1164/2500 good answers, 46.56%, 602 yolorandom train
+		List<Article> listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50train");
 		//List<Article> listfiles = ListBuilder.buildList("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/");
-		DataRepresentation d = new DataRepresentation();
+		List<TextData> trainingSet = parseAll(listfiles);
+		
+		listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50test");
 		//d.parseAll(listfiles);
-		File f = new File("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/42764newsML.txt");
-		d.parse(f);
+		testAll(trainingSet, listfiles);
 		//call classifier
 		//dance macarena
 		//bring beer and stuffs
