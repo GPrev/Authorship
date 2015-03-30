@@ -25,7 +25,7 @@ public class TextData {
 		features = new HashMap<String, Double>();
 	}
 	
-	public TextData(String author, HashMap<Character, Integer> punct, List<Integer> linesLengths, int paras, int size, int nbLines) {
+	public TextData(String author, HashMap<Character, Integer> punct, List<Integer> linesLengths, int paras, int size, int nbLines, int mName, int abrev) {
 		this.author = author;
 		features = new HashMap<String, Double>();
 		features.put("lineLengths", ListCalc.median(linesLengths));
@@ -33,7 +33,8 @@ public class TextData {
 		features.put("textSize", (double) size);
 		features.put("nbWords", (double) linesLengths.stream().mapToInt(Integer::intValue).sum() / linesLengths.size());
 		features.put("nbLines", (double) nbLines);
-		
+		features.put("mName", (double) mName);
+		features.put("abrev", (double) abrev);
 		//punctuation = new HashMap<Character, Integer>(punct);
 		for (Character s : punct.keySet()) {
 			features.put("punctuation"+ s, (double) punct.get(s));

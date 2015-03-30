@@ -47,6 +47,11 @@ public class DataRepresentation {
 		punctuation.put(':', 0);
 		punctuation.put(',', 0);
 		punctuation.put('.', 0);
+		punctuation.put('-', 0);
+		punctuation.put('(', 0);
+		int abrev = 0;
+		int mName = 0;
+		//punctuation.put(')', 0);
 		try {
 			bytes = Files.readAllBytes(Paths.get(article.getCurrent().getPath()));
 		} catch (IOException e1) {
@@ -67,10 +72,21 @@ public class DataRepresentation {
 			if (isTitle(line)) {
 				paragraphs++;
 			}
+			else {
+				for (String word : line.split(" ")) {
+					if (word == word.toUpperCase()) {
+						abrev++;
+					}
+					else if (word.charAt(0) == word.toUpperCase().charAt(0)){
+						mName++;
+					}
+				}	
+			}
 			//System.out.println(line);
 			numberOfWords.add(line.split(" ").length);
+			
 		}
-		return new TextData(article.getAuthor(), punctuation, numberOfWords, paragraphs,  text.length(), lines.length);
+		return new TextData(article.getAuthor(), punctuation, numberOfWords, paragraphs,  text.length(), lines.length, mName, abrev);
 		//return lines.length;
 		/*BufferedReader br = null;
 		 
@@ -121,7 +137,7 @@ public class DataRepresentation {
 		//List<Article> listfiles = ListBuilder.buildList("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/");
 		List<TextData> trainingSet = parseAll(listfiles);
 		TextData.setMinMaxFeatures(trainingSet);
-		listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50test");
+		//listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50test");
 		//d.parseAll(listfiles);
 		testAll(trainingSet, listfiles);
 		//call classifier
