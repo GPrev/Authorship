@@ -49,6 +49,8 @@ public class DataRepresentation {
 		punctuation.put('.', 0);
 		punctuation.put('-', 0);
 		punctuation.put('(', 0);
+		punctuation.put('"', 0);
+		punctuation.put('\'', 0);
 		int abrev = 0;
 		int mName = 0;
 		//punctuation.put(')', 0);
