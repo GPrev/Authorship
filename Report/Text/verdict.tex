@@ -1,0 +1,18 @@
+In the end, we processed te results of our calculus, in order to compare them.
+
+\subsubsection {Results for the first classifier}
+
+The first classifier's results were quite poor, with low precision and recall.
+Tests on other data has proven our classifier to work (we tested it with simple examples, like flower categorization).
+The reasons why it worked so poorly on authorship attributions are because the information we chose to extract was not sufficient to produce accurate results.
+
+
+\subsubsection {Results for the second classifier}
+
+The results for the second classifier, unlike those of the first classifier, were satisfactory.
+We tested three factors : 
+\begin{itemize}
+	\item Sentence length  gave very inconsistent results
+	\item Lexical frequency gave much better results
+	\item Part-of-speech tagging, which used too much RAM to be run on the entire database, but gave good results on a subset of the available authors
+\end{itemize}
