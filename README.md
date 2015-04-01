@@ -38,7 +38,7 @@ This plan is temporary, if you want to modify it mail the group first
 - The first classifier
   * Data acquisition
   * Data processing
-- The second classifier
+- The second classifier (I will write this part (Liantsoa))
   * Data acquisition
   * Data processing
 - Comparison of the two classifiers

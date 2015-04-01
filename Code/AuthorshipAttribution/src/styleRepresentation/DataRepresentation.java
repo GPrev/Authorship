@@ -49,6 +49,8 @@ public class DataRepresentation {
 		punctuation.put('.', 0);
 		punctuation.put('-', 0);
 		punctuation.put('(', 0);
+		punctuation.put('"', 0);
+		punctuation.put('\'', 0);
 		int abrev = 0;
 		int mName = 0;
 		//punctuation.put(')', 0);
@@ -74,7 +76,7 @@ public class DataRepresentation {
 			}
 			else {
 				for (String word : line.split(" ")) {
-					if (word == word.toUpperCase()) {
+					if (word.equals(word.toUpperCase())) {
 						abrev++;
 					}
 					else if (word.charAt(0) == word.toUpperCase().charAt(0)){
@@ -110,7 +112,7 @@ public class DataRepresentation {
 	}
 	
 	public static boolean isTitle(String line) {
-		return line == line.toUpperCase();
+		return line.equals(line.toUpperCase());
 	}
 	
 	public static void testAll(List<TextData> trainingSet, List<Article> testSet) {
@@ -119,7 +121,7 @@ public class DataRepresentation {
 		int yolorandom = 0;
 		for (Article art : testSet) {
 			Entry<String, Integer> res = KNearestNeighborsClassifier.getResponse(KNearestNeighborsClassifier.getNeighbors(trainingSet, parse(art), k));
-			if (art.getAuthor() == res.getKey()) {
+			if (art.getAuthor().equals(res.getKey())) {
 				goodAnswers++;
 				if (res.getValue() == 1){
 					yolorandom++;
@@ -137,7 +139,7 @@ public class DataRepresentation {
 		//List<Article> listfiles = ListBuilder.buildList("C:/Users/Miura Hareaki/Desktop/Travail/authorship_attribution/Authorship/Data/Reuters50_50/C50test/AaronPressman/");
 		List<TextData> trainingSet = parseAll(listfiles);
 		TextData.setMinMaxFeatures(trainingSet);
-		//listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50test");
+		listfiles = ListBuilder.buildList("../../Data/Reuters50_50/C50test");
 		//d.parseAll(listfiles);
 		testAll(trainingSet, listfiles);
 		//call classifier

@@ -1,0 +1,43 @@
+\label{lab:data2}
+
+For this second section, we decide to focus on the author's style. In fact, each writer possesses some unique characteristic which is called the authorial or writer invariant in stylometry\footnote{Application of the study of linguistic style}. This later is constant for all texts written by an author and different of other authors. The authorial invariant are based on textual properties belonging to either of four categories : lexical, syntactic, structural and content-specific.
+\begin{itemize}
+	\item Lexical frequencies : the total of words or characters or the average number of words per sentence.
+	\item Syntactic features : the structure of sentences which can be simple, complex, conditional or built in punctuation marks. 
+	\item Structural attributes : the organization of the text (drawings, headings, signatures).
+	\item Content-specific properties : the recognition of some keywords which have special meaning and are importance for the text.
+\end{itemize} 
+
+\subsubsection{The second representation}
+For the second representation of the data, we decide to work on Part-of-speech Tagging which is very useful in information retrieval. In our case, we want to attribute an author to an unknown text in function of the frequency of using a part-of-speech. 
+
+\subsubsection{Part-of-speech tagging}
+Part-of-speech tagging is the process of assigning a part-of-speech to each word in a sentence as noun, verb, adjective, adverb, article, preposition, pronoun, conjunction and interjection.\\
+
+For examples:
+
+\textbf{Heat} is a noun but also can be a verb.
+
+\textbf{in} is a preposition but also can be a noun or an adverb.
+
+To do POS tagging, we choose a set of tags to assign word.
+
+Here is an example of result of the tagging: 
+
+the/DT higher/JJR minimum/JJ wage/NN sign/NN into/IN law/NN tuesday/NNP will/MD be/VB welcome/JJ relief/NN for/IN million/CD of/IN workers/NNS ./.
+
+\begin{itemize}
+	\item DT stands for determiner.
+	\item JJR stands for adjective, comparative.
+    \item JJ stands for adjective.
+    \item NN stands for noun.
+    \item VB stands for verb base form.
+    \item NNP stands for proper noun singular.
+    \item NNS stands for noun plural.
+    \item MD stands for modal.
+    \item IN stands for preposition or subordinating or conjunction.
+    \item CD stands for cardinal number.
+
+\end{itemize}
+
+
