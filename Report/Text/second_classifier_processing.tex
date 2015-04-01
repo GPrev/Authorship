@@ -1,1 +1,47 @@
 \label{lab:clas2}
+
+
+To implement the second classifier, we decide to use a Java library for authorship attribution : JGAAP. This choice is explained by the fact that tagging all the text train ( 2500 texts) takes a lot of time (an average of 3 to 4 seconds per text), so the algorithm of tagging in JGAAP is very efficient and simplified. 
+
+\subsubsection{JGAAP}
+JGAAP (Java Graphical Authorship Attribution Program) is a library written in Java for textual analysis, text categorization and authorship attribution.
+
+JGAAP has two main objectives :
+\begin{itemize}
+	\item To allow people unfamiliar with machine learning and quantitative analysis the ability to use cutting edge techniques on their text based stylometry or textometry problems
+    \item To act as a framework for testing and comparing the effectiveness of different analytic techniques' performance on text analysis quickly and easily.
+\end{itemize}
+
+To run JGAAP in our classifier, we need to specify different treatments that must be applied to data.
+
+First of all, we need to specify the training set and the test set. For this, we need to create a \textit{Document} object from each text in which we do not specify the author for the texts in the test set.
+
+Secondly, we precise the treatment to do with the input data before applying an analysis method. The step of canonicalization can be very important in function of the problem. Among the canonicizers provide in JGAAP, there are some useful methods like normalizing the document to printable ASCII which strip all non-ASCII characters from the text, which we choose as canonicizer. But there are other canonicizer liker striping number from the text, striping null character from the text, unifying case, striping punctuation which can be useful too.
+
+Thirdly, we choose an event Driver. The features extracted from each document will depend on the event drivers chosen. In our case, we decide to work on part-of-speech Tagger. 
+
+Fourthly, we choose an event Culler. This latter allows us to analyze only the most frequent events, only the least common events or only those events which appear in all documents. In our case, we choose the most common events, so any uncommon events will be eliminated from the documents prior to analysis.
+
+At last, we choose the analysis methods to classify the test set.
+We decide to process Linear Discriminant Analysis which aim to reduce the dimensionality for input data and if procedures applied to texts of both known and unknown authors give the same
+result, the question of authorship identification is settled.
+
+As a result, JGAAP gives a file which is presented like this :
+\begin{verbatim}
+272695newsML.txt ..\..\C50test/AlanCrosby/272695newsML.txt
+Canonicizers: Normalize ASCII 
+EventDriver: Coarse POS Tagger 
+Analysis: LDA 
+1. AlanCrosby 9.999996825634658E12
+2. BradDorfman 9.999996825633748E12
+3. AlexanderSmith 9.999996825632637E12
+4. EricAuchard 9.999996825632283E12
+5. AaronPressman 9.999996825631545E12
+6. BernardHickey 9.999996825631494E12
+7. DavidLawder 9.999996825631479E12
+8. DarrenSchuettler 9.999996825630238E12
+9. EdnaFernandes 9.999996825629879E12
+10. BenjaminKangLim 9.999996825629223E12
+\end{verbatim}
+
+We can notice the identity of the text, the author which we want to predict, the lists of treatments on the document and the LDA analysis methods presents the 10 authors predicted where the first one have the highest probability to be the writer of the text.
