@@ -2,17 +2,19 @@ In the end, we processed te results of our calculus, in order to compare them.
 
 \subsubsection {Results for the first classifier}
 
-The first classifier's results were quite poor, with low precision and recall.
+The first classifier's results were quite poor, with low precision and recall (approx. 0.15 each).
 Tests on other data has proven our classifier to work (we tested it with simple examples, like flower categorization).
 The reasons why it worked so poorly on authorship attributions are because the information we chose to extract was not sufficient to produce accurate results.
 
 
 \subsubsection {Results for the second classifier}
 
-The results for the second classifier, unlike those of the first classifier, were satisfactory.
-We tested three factors : 
-\begin{itemize}
-	\item Sentence length  gave very inconsistent results
-	\item Lexical frequency gave much better results
-	\item Part-of-speech tagging, which used too much RAM to be run on the entire database, but gave good results on a subset of the available authors
-\end{itemize}
+The results for the second classifier, unlike those of the first classifier, were satisfactory, with a slight issue : the analysis using part-of-speech tagging used too much RAM to be run on the entire database.
+We decided to run it on a subset of the available authors, and it gave good results (Precision of 0.53, Recall of 0.50, F-Measure of 0.51).
+That basically means that half of the texts are predicted correctly, which is not bad considering the test was performed with 11 authors.
+It is a lot better than randomness, which would only have guessed correctly 1/11 times.
+
+
+\subsubsection {Conclusion}
+
+We tried two classifiers and only one gave us good results. Classifying with the length of sentences, frequency of punctuation, etc. did not prove sufficient, but  part-of-speech tagging proved to be more reliable.

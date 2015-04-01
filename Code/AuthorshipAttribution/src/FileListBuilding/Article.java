@@ -1,4 +1,4 @@
-package fileListBuilding;
+package FileListBuilding;
 // Package renomé : en java, ça commence par des minuscules :)
 import java.io.File;
 

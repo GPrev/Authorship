@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 
 import Stats.MulticlassStat;
 import styleClassifier.KNearestNeighborsClassifier;
-import fileListBuilding.*;
+import FileListBuilding.*;
 
 public class DataRepresentation {
 	public static List<List<Integer>> confusionM = null;
@@ -198,7 +198,7 @@ public class DataRepresentation {
 		testAll(trainingSet, testSet);
 		m = MulticlassStat.makeMulticlassStat(getMatrix());
 		
-		System.out.println("Précision : " + m.accuracy());
+		System.out.println("Précision : " + m.precision());
 		System.out.println("Recall : " + m.recall());
 		System.out.println("fMesure : " + m.fMeasure());
 		
