@@ -17,13 +17,18 @@ public class MulticlassStat implements Statistician {
 			_classStats.add(new BinaryStat(totalCount, classCounts.get(i), classPrediction.get(i), classWellPredicted.get(i)));
 		}
 	}
-	
+
 	public static MulticlassStat makeMulticlassStat(List<List<Integer>> confusionMatrix)
 	{
 		if(confusionMatrix == null || confusionMatrix.size() == 0 || confusionMatrix.get(0).size() == 0)
 			return null;
 		//else
 		return new MulticlassStat(classCounts(confusionMatrix), classPrediction(confusionMatrix), classWellPredicted(confusionMatrix), totalCount(confusionMatrix));
+	}
+	
+	public static MulticlassStat makeMulticlassStat(String csvFile)
+	{
+		return makeMulticlassStat(csv.Reader.readCSV(csvFile));
 	}
 	
 	private static int totalCount(List<List<Integer>> confusionMatrix)

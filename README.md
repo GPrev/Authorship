@@ -30,11 +30,9 @@ maks, etc.). At least two different representations of the textual data have to 
 - I will reorganize files later so we all have the same eclipse project. (*Thierry*)
 
 ## Plan of the report
-This plan is temporary, if you want to modify it mail the group first
 
 - Introduction
 - The two models chosen (no technical details here)
-- Stemming : why and how ?
 - The first classifier
   * Data acquisition
   * Data processing
@@ -44,4 +42,18 @@ This plan is temporary, if you want to modify it mail the group first
 - Comparison of the two classifiers
   * The result evaluation methodology
   * The final verdict
+
+## Plan of the presentation
+
+- Inroduction
+  * What is authorship atribution ?
+  * The first classifier
+  * The second classifier
+- Technical soluions
+  * Demo first classiier
+  * Demo second classiier
 - Conclusion
+  * Comparison of the two classifiers
+  * Possible improvements
+   
+  The presentation will be 15 minutes long, plus 10 minutes of questions.
