@@ -1,0 +1,12 @@
+Statistics results :
+
+accuracy : 9.096
+precision : 0.548
+recall : 0.5846485
+specificity : 0.9500235
+silence : 0.41535148
+fallout : 0.049976517
+falseAlarm : 0.452
+falseReject : 0.050222225
+errorRate : 0.904
+fMeasure : 0.56573135
