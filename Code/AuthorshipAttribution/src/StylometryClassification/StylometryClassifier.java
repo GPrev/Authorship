@@ -76,14 +76,19 @@ public class StylometryClassifier {
 	}
 	
 	/**
-	 * Event culler : operates on the resulting events from processed documents .
-	 * Refer to JGAAP documentation to know all the event cullers available.
-	 * @param	action : the name of the event culler
+	 * Event driver : like the lexical frequencies, tagging, punctuation ...
+	 * Refer to JGAAP documentation to know all the event drivers available.
+	 * @param	action : the name of the event driver
 	 */
 	public void choiceOfEventDriver(String action) throws Exception{
 		getJGAAP_API().addEventDriver(action);
 	}
-	
+
+	/**
+	 * Analysis Methods : the method of the classifier 
+	 * Refer to JGAAP documentation to know all the analysis methods available.
+	 * @param	action : the name of the analysis methods
+	 */
 	public void choiceOfAnalysisMethod(String action) throws Exception{
 		getJGAAP_API().addAnalysisDriver(action);
 	}

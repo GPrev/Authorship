@@ -86,7 +86,7 @@ public class MainStylometryClassifier {
 					+ "\n ...");
 			String str1 = sc.nextLine();
 			classifier.choiceOfEventDriver(str1);
-			
+			/*
 			System.out.println("Enter the event culler : "
 					+ "\n-Least Common Events "
 					+ "\n-Most Common Events"
@@ -95,7 +95,7 @@ public class MainStylometryClassifier {
 					+ "\n ...");
 			String str2 = sc.nextLine();		
 			classifier.choiceOfEventCuller(str2);
-			
+			*/
 			
 			System.out.println("Enter the analysis method : "
 					+ "\n-LDA "
@@ -131,31 +131,36 @@ public class MainStylometryClassifier {
 		
 		//Generated the results
 		Statistician stats = MulticlassStat.makeMulticlassStat("C:/Users/Rasata Liantsoa/workspace/PartOfSpeech/AuthorshipAttribution/ConfusionMatrix.csv") ;
-		try {
-			OutputStream outputstream = new FileOutputStream("Statistiques.txt");
-			Writer output = new OutputStreamWriter(outputstream);
-			output = new BufferedWriter(output);
+		if(stats == null){
+			System.out.println("Make sure that you have perl installed and execute analyse_result.pl");
+		}else{
 			try {
-				output.write("Statistics results :\n");
-				output.write("\naccuracy : "+stats.accuracy());
-				output.write("\nprecision : "+stats.precision());
-				output.write("\nrecall : "+stats.recall());
-				output.write("\nspecificity : "+stats.specificity());
-				output.write("\nsilence : "+stats.silence());
-				output.write("\nfallout : "+stats.fallout());
-				output.write("\nfalseAlarm : "+stats.falseAlarm());
-				output.write("\nfalseReject : "+stats.falseReject());
-				output.write("\nerrorRate : "+stats.errorRate());
-				output.write("\nfMeasure : "+stats.fMeasure());
+				OutputStream outputstream = new FileOutputStream("Statistiques.txt");
+				Writer output = new OutputStreamWriter(outputstream);
+				output = new BufferedWriter(output);
+				try {
+					output.write("Statistics results :\n");
+					output.write("\naccuracy : "+stats.accuracy());
+					output.write("\nprecision : "+stats.precision());
+					output.write("\nrecall : "+stats.recall());
+					output.write("\nspecificity : "+stats.specificity());
+					output.write("\nsilence : "+stats.silence());
+					output.write("\nfallout : "+stats.fallout());
+					output.write("\nfalseAlarm : "+stats.falseAlarm());
+					output.write("\nfalseReject : "+stats.falseReject());
+					output.write("\nerrorRate : "+stats.errorRate());
+					output.write("\nfMeasure : "+stats.fMeasure());
+					
+					output.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
-				output.flush();
-			} catch (IOException e) {
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
+		
 
 		
 	}
